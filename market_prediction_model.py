@@ -10,6 +10,7 @@ from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.feature_selection import SelectFromModel
 from sklearn.svm import LinearSVC
 from sklearn.metrics import auc, precision_recall_curve, confusion_matrix, roc_curve, f1_score, accuracy_score, recall_score, precision_score
+import pickle
 
 
 def compute_metrics_standardized_confident(y_predicted, x_test, y_test, confidence):
@@ -61,6 +62,7 @@ def extract_directory_data_user(dir_path):
     x_train, x_test, y_train, y_test = train_test_split(data_X, data_Y, test_size=0.2, random_state=0)
     x_train, y_train = balance_data(x_train, y_train)
     print(f"Train data shape: {data_X.shape}")
+    pickle.dump(standard_scalar, open(os.path.join("trained_models", 'market_scalar.pkl'), 'wb'))
     return x_train, x_test, y_train, y_test, standard_scalar
 
 
@@ -133,10 +135,11 @@ def svc_feature_selection(x_train, x_test, y_train):
     x_train_new = model.transform(x_train)
     x_test_new = model.transform(x_test)
     print(x_train_new.shape)
+    pickle.dump(lsvc, open(os.path.join("trained_models", 'content_feature_selection.pkl'), 'wb'))
     return x_train_new, x_test_new, model
 
 
-if __name__ == "__main__":
+def build_model():
     market_data_directory = "market_data"
     x_train, x_test, y_train, y_test, standard_scalar = extract_directory_data_user(market_data_directory)
     x_train, x_test, fs_model = svc_feature_selection(x_train, x_test, y_train)
@@ -149,8 +152,10 @@ if __name__ == "__main__":
                   metrics=['accuracy'])
     model.summary()
     model.fit(x_train, y_train, epochs=15, validation_data=(x_test, y_test))
-
+    model.save(os.path.join("trained_models", 'market_model'))
     y_predicted = model.predict(x_test)
 
     results = compute_metrics_standardized_confident(y_predicted, x_test, y_test, confidence=0.7)
     print(results[0])
+
+build_model()

@@ -5,7 +5,6 @@ from sklearn import preprocessing
 from sklearn.cluster import KMeans
 import pickle
 
-
 '''
 This function takes in the directory path and returns a numpy array of all the data 
 in all the csv files in that directory
@@ -165,5 +164,5 @@ def build_model():
 
 # Example usage
 # build_model()
-features = ['1', '0b595d3a-f7ad-432f-b9f6-3c9ce2e00e7d', 'Nealy', 'Iley', 'niley1', 'niley1@histats.com', 'G5Odx2', '75', 'Male', '2611484', '1500000', '132278', '135966', '70', '11528', '2', '4', '0', 'Below 10%', '5', "Don't pull out and invest more", '82920', '1895176', '8235270', 'CNXN', 'VNO^L', 'CBZ', 'CHFC', 'Consumer Services', 'Catalog/Specialty Distribution', 'OSMT', 'RHHBY', 'ARCT', 'ITCI', 'BTAI', 'LJPC', 'WFC^J', 'OI', 'LRCX', 'WBA', '1/3/1981', 'SELB']
-print(content_query_API(features))
+# features = ['1', '0b595d3a-f7ad-432f-b9f6-3c9ce2e00e7d', 'Nealy', 'Iley', 'niley1', 'niley1@histats.com', 'G5Odx2', '75', 'Male', '2611484', '1500000', '132278', '135966', '70', '11528', '2', '4', '0', 'Below 10%', '5', "Don't pull out and invest more", '82920', '1895176', '8235270', 'CNXN', 'VNO^L', 'CBZ', 'CHFC', 'Consumer Services', 'Catalog/Specialty Distribution', 'OSMT', 'RHHBY', 'ARCT', 'ITCI', 'BTAI', 'LJPC', 'WFC^J', 'OI', 'LRCX', 'WBA', '1/3/1981', 'SELB']
+# print(content_query_API(features))
